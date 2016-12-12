@@ -1,0 +1,5 @@
+#!/bin/bash
+# save the base filename, only the man page name
+FILENAME=$(basename $1)
+# use groffer to decompress then grep the words and sort and save the files as man{page_name}.man
+groffer -k -Kutf8 --text "${1}" | grep -o -E '\w+' | sort -u > "man_${FILENAME%%.*}.man"
