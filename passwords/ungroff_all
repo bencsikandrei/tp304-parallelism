@@ -2,7 +2,7 @@
 TEMPFILE="all.tmp"
 FINALFILE="all.man"
 # use groffer to decompress then grep the words and sort and save the files as man{page_name}.man
-find /usr/share/man/${1}/ -type f | while read filename; do
+find /usr/share/man/fr/ -type f | while read filename; do
     groffer -k -Kutf8 --text ${filename} | grep -o -E '\w+' | sort -u | cat >> ${TEMPFILE}
 done
 
