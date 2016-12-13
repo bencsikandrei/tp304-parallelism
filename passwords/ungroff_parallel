@@ -1,0 +1,12 @@
+#!/bin/bash
+FINALFILE="all.man"
+# path to save to
+PATHS="/usr/share/man/fr/"
+# use groffer to decompress then grep the words and sort and save the files as man{page_name}.man
+files=`find /usr/share/man/fr/ -type f`
+# # 
+# for fname in files;
+# do
+# 	# echo ${fname}
+# 	tmp="${tmp}`groffer -k -Kutf8 --text ${fname} | grep -o -E '\w+' | sort -u`"
+# done;}
