@@ -1,0 +1,14 @@
+#!/bin/bash
+# hash count
+pw_hashes=`python count_passwords.py` 
+DICT=$(head -n 10000 french.txt)
+
+# compute the hashes from all the words in dictionary
+while read line; 
+do
+	words="${words}"$'\n'"${line}";
+	tmp="${tmp}"$'\n'"`echo -n $line | md5sum | awk '{print $1}'`"; 
+done <<< "${DICT}"
+
+#echo ${words}
+#echo ${tmp}
