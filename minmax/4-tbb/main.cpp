@@ -4,8 +4,8 @@
 #include "bench.h"
 #include "minmax.h"
 
-static void random_init(size_t n, uint32_t* v) {
-	for(size_t i=0;i<n; i++)
+static void random_init(uint32_t n, uint32_t* v) {
+	for(uint32_t i=0;i<n; i++)
 		v[i] = rand();
 }
 
@@ -16,7 +16,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 
-	const size_t n = atoll(argv[1]);
+	const uint32_t n = atoll(argv[1]);
 
 	uint32_t* vec = (uint32_t*) malloc( n*sizeof(uint32_t));
     if(!vec) {

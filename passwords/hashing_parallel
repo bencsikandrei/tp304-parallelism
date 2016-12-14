@@ -1,0 +1,4 @@
+#!/bin/bash
+OUTPUTFILE="out.txt"
+# compute the hashes from all the words in dictionary
+head -n 10000 dictionaries/all.txt | parallel "echo -e {} | md5sum | awk '{print $1}'>> ${OUTPUTFILE}"

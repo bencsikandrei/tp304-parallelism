@@ -1,0 +1,15 @@
+#!/bin/bash
+TEMPFILE="all.tmp"
+FINALFILE="all.man"
+
+# use groffer to decompress
+FILES=($(find /usr/share/man/fr/ -type f 2>/dev/null))
+# for every entry in the array
+for file in ${FILES[@]};
+do 
+	# echo $file
+
+	tmp="${tmp}\n`groffer -k -Kutf8 --text ${file} | grep -o -E '\w+' | sort -u`"
+done;
+
+echo -e $tmp | tr ' ' '\n' | sort -u > ${FINALFILE}

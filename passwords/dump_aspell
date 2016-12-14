@@ -1,0 +1,2 @@
+#!/bin/bash
+aspell -d fr dump master | sort -u > french.txt

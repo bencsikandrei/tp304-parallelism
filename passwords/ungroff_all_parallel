@@ -1,0 +1,4 @@
+#!/bin/bash
+FINALFILE="all.man"
+# use find to get all man pages, then parallel to process them and output them to the all.man file
+find /usr/share/man/fr/ -type f | parallel "groffer -k -Kutf8 --text {} | grep -o -E '\w+' | tr ' ' '\n' | sort -u >> ${FINALFILE}" 
