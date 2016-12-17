@@ -1,5 +1,5 @@
 CPPFLAGS=-I/usr/include/qt4/QtCore -I/usr/include/qt4/QtGui -I/usr/include/qt4
-CXXFLAGS=-O1 -std=c++0x -Wall -Wextra  -g -fopenmp
+CXXFLAGS=-O3 -std=c++0x -mtune=native -march=native -Wall -Wextra  -g -fopenmp
 LDFLAGS=-L/opt/tbb-latest/lib
 LDLIBS=-lQtCore -lQtGui -lgomp
 CC=g++
