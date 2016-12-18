@@ -1,7 +1,7 @@
 #include <fstream>
 #include <sys/time.h>
 #include <cstdlib>
-
+#include <string.h>
 #include <boost/random.hpp>
 
 #include "tools.h"
@@ -30,7 +30,7 @@ Histogram parse_args(int argc, char** argv)
 	double* pts;
 	size_t n = 0;
 
-	boost::random::mt19937 rng;
+	boost::mt19937 rng;
 
 	if (strcmp(action, "--file") == 0) {
 		const char* path = argv[2];
@@ -58,7 +58,7 @@ Histogram parse_args(int argc, char** argv)
 	}
 	else
 	if (strcmp(action, "--gen-normal") == 0) {
-		boost::random::normal_distribution<double> rand(10.0, 2.0);
+		boost::normal_distribution<double> rand(10.0, 2.0);
 		n = atoll(argv[2]);
 		posix_memalign((void**) &pts, 16, sizeof(double)*n);
 		for (size_t i = 0; i < n; i++) {
