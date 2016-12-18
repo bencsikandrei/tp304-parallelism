@@ -39,7 +39,10 @@ int main(int argc, char** argv)
 	}
 
 	BENCH_START(edge);
-	edge_detect(gray_dst, gray_img, width, height, edge_width);
+	// edge_detect_parallel(gray_dst, gray_img, width, height, edge_width);
+	// edge_detect(gray_dst, gray_img, width, height, edge_width);
+	edge_detect_task(gray_dst, gray_img, width, height, edge_width);
+
 	BENCH_END_TRANSFORM(edge, "edge-detect", sizeof(uint8_t), width*height*edge_width*edge_width);
 
 	// Show result
