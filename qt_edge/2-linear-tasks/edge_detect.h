@@ -7,5 +7,6 @@
 #define MAX(a,b) (((a)>(b))?(a):(b))
 
 void edge_detect(uint8_t* gray_dst, const uint8_t* gray_img, const int width, const int height, const int edge_width);
+void edge_detect_serial(uint8_t* gray_dst, const uint8_t* gray_img, const int width, const int height, const int edge_width);
 
 #endif

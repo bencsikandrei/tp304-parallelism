@@ -65,3 +65,64 @@ void edge_detect(uint8_t* gray_dst, const uint8_t* gray_img, const int width, co
     delete [] min_img;
     delete [] max_img;
 }
+
+
+void edge_detect_parallel(uint8_t* gray_dst, const uint8_t* gray_img, const int width, const int height, const int edge_width)
+{
+
+    uint8_t* min_img = new uint8_t [width*height];
+    uint8_t* max_img = new uint8_t [width*height];
+    #pragma omp parallel sections 
+    {
+    	#pragma omp section 
+    	{
+	    	erode(min_img, gray_img, width, height, edge_width);
+    	}
+    	#pragma omp section 
+    	{
+    		dilate(max_img, gray_img, width, height, edge_width);
+	    
+    	}
+
+	}
+	for (int y = 0; y < height; y++) {
+		for (int x = 0; x < width; x++) {
+			// Compute final value
+			gray_dst[x+y*width] = max_img[x+y*width] - min_img[x+y*width];
+		}
+	}
+    delete [] min_img;
+    delete [] max_img;
+
+}
+
+void edge_detect_task(uint8_t* gray_dst, const uint8_t* gray_img, const int width, const int height, const int edge_width)
+{
+
+    uint8_t* min_img = new uint8_t [width*height];
+    uint8_t* max_img = new uint8_t [width*height];
+    #pragma omp parallel
+    {	
+    	#pragma omp single 
+    	{
+			#pragma omp task 
+			{
+		    	erode(min_img, gray_img, width, height, edge_width);
+			}
+			#pragma omp task 
+			{
+				dilate(max_img, gray_img, width, height, edge_width);
+		    
+			}
+		}
+	}
+	for (int y = 0; y < height; y++) {
+		for (int x = 0; x < width; x++) {
+			// Compute final value
+			gray_dst[x+y*width] = max_img[x+y*width] - min_img[x+y*width];
+		}
+	}
+    delete [] min_img;
+    delete [] max_img;
+
+}
